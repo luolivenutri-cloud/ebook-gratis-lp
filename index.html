@@ -107,10 +107,25 @@
           return;
         }
 
-        // ATENCAO: esta pagina e estatica (GitHub Pages), sem backend.
-        // Por enquanto o envio so libera o download -- nao ha lugar automatico
-        // salvando nome/e-mail/WhatsApp aqui ainda. Ver aviso no chat.
-        mostrarObrigada();
+        btn.disabled = true;
+        btn.textContent = 'Enviando...';
+
+        var dados = new FormData();
+        dados.append('nome', nome);
+        dados.append('email', email);
+        dados.append('whatsapp', whatsappDigitos);
+
+        fetch('https://formspree.io/f/xgaegrgy', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: dados
+        }).catch(function (err) {
+          console.error('Erro ao enviar pro Formspree', err);
+        }).finally(function () {
+          btn.disabled = false;
+          btn.textContent = 'Quero meu e-book grátis';
+          mostrarObrigada();
+        });
       });
     })();
   </script>
