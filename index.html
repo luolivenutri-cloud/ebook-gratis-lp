@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-book Grátis — Receitas com Propósito | Lu Oliveira Nutrichef</title>
+<meta name="description" content="Baixe grátis o e-book Receitas com Propósito: 11 receitas funcionais, sem glúten e com alta densidade nutritiva, da nutricionista Lu Oliveira.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@500;600;700&family=Yellowtail&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="topo">
+      <img class="logo" src="assets/logo-brown-h.png" alt="Lu Oliveira Nutrichef">
+    </header>
+
+    <section class="hero">
+      <img class="ornamento tl" src="assets/corner-tl.png" alt="">
+      <img class="ornamento br" src="assets/corner-br.png" alt="">
+      <div class="conteudo">
+        <p class="eyebrow">E-book grátis</p>
+        <h1>Receitas com Propósito: sabor que cuida, com praticidade</h1>
+        <p class="subtitulo">11 receitas funcionais, sem glúten e com alta densidade nutritiva, criadas pela nutricionista Lu Oliveira. Baixe grátis e comece a cozinhar hoje.</p>
+
+        <img class="foto-capa" src="assets/lu-fouet.jpg" alt="Lu Oliveira, nutricionista funcional, sorrindo com um fouet na mão">
+
+        <ul class="beneficios">
+          <li>11 receitas completas — salgadas, lanches e doces</li>
+          <li>Sem glúten, receitas inclusivas</li>
+          <li>Criadas por Lu Oliveira — nutricionista funcional, fitoterapeuta e Chef Funcional, com mais de 30 anos de experiência</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card-form" id="cardForm">
+      <h2>Preencha e receba o e-book agora</h2>
+      <div class="erro" id="msgErro" hidden>Confira seus dados — algum campo não passou. Tente de novo.</div>
+
+      <form id="formLead">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" required minlength="2" maxlength="80" placeholder="Seu nome completo">
+
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com">
+
+        <label for="whatsapp">WhatsApp</label>
+        <input type="tel" id="whatsapp" name="whatsapp" required placeholder="(51) 90000-0000">
+
+        <div class="hp-field" aria-hidden="true">
+          <label for="site">Não preencha este campo</label>
+          <input type="text" id="site" name="site" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="consentimento">
+          <input type="checkbox" id="consentimento" name="consentimento" required>
+          <label for="consentimento">Concordo em receber o e-book e novidades da Lu Oliveira Nutricionista por e-mail e WhatsApp.</label>
+        </div>
+
+        <button type="submit" class="cta" id="btnEnviar">Quero meu e-book grátis</button>
+      </form>
+    </section>
+
+    <section class="obrigada" id="obrigada" hidden>
+      <div class="icone">🎉</div>
+      <h2>Prontinho! Seu e-book já está pronto pra baixar.</h2>
+      <a class="btn-download" id="linkDownload" href="ebook-receitas-com-proposito.pdf" download>Baixar o e-book agora</a>
+      <a class="link-instagram" href="https://www.instagram.com/luoliveiranutricionista" target="_blank" rel="noopener">Me siga no Instagram @luoliveiranutricionista →</a>
+    </section>
+
+    <footer class="rodape">
+      <img class="marca" src="assets/marca-icone.png" alt="">
+      <p>Lu Oliveira Nutricionista · Instagram @luoliveiranutricionista</p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var form = document.getElementById('formLead');
+      var erro = document.getElementById('msgErro');
+      var cardForm = document.getElementById('cardForm');
+      var obrigada = document.getElementById('obrigada');
+      var btn = document.getElementById('btnEnviar');
+
+      function mostrarObrigada() {
+        cardForm.hidden = true;
+        obrigada.hidden = false;
+        obrigada.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        erro.hidden = true;
+
+        var nome = document.getElementById('nome').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var whatsapp = document.getElementById('whatsapp').value.trim();
+        var consentimento = document.getElementById('consentimento').checked;
+        var honeypot = document.getElementById('site').value.trim();
+        var whatsappDigitos = whatsapp.replace(/\D/g, '');
+        var emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        if (honeypot !== '') { mostrarObrigada(); return; }
+
+        if (nome.length < 2 || !emailValido || whatsappDigitos.length < 10 || !consentimento) {
+          erro.hidden = false;
+          return;
+        }
+
+        // ATENCAO: esta pagina e estatica (GitHub Pages), sem backend.
+        // Por enquanto o envio so libera o download -- nao ha lugar automatico
+        // salvando nome/e-mail/WhatsApp aqui ainda. Ver aviso no chat.
+        mostrarObrigada();
+      });
+    })();
+  </script>
+</body>
+</html>
